@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Pickaxe, Users, MapPin, Server, TreeDeciduous, Swords } from "lucide-react";
+import { Pickaxe, Users, MapPin, Server, TreeDeciduous, Swords, Shield, Zap, Gift } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
@@ -105,6 +105,42 @@ const Index = () => {
         </motion.div>
       </section>
 
+      {/* Server Benefits Section - NEW */}
+      <section className="py-16 px-4 bg-gradient-to-b from-earth-brown/30 to-transparent backdrop-blur-sm">
+        <div className="max-w-6xl mx-auto text-center mb-10">
+          <h2 className="text-3xl font-minecraft font-bold">Server Benefits</h2>
+          <p className="mt-2 text-foreground/70 font-minecraft">Why you should join our Minecraft community</p>
+        </div>
+        
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8"
+        >
+          <div className="bg-earth-brown/30 backdrop-blur-md p-6 pixelated-border hover:translate-y-[-5px] transition-all duration-300">
+            <Shield className="text-primary mb-4" size={40} />
+            <h3 className="text-xl font-minecraft font-semibold mb-2">Protection System</h3>
+            <p className="text-foreground/70 font-minecraft">Claim your land and protect your builds with our advanced protection system</p>
+          </div>
+          <div className="bg-earth-brown/30 backdrop-blur-md p-6 pixelated-border hover:translate-y-[-5px] transition-all duration-300">
+            <Zap className="text-primary mb-4" size={40} />
+            <h3 className="text-xl font-minecraft font-semibold mb-2">Active Staff</h3>
+            <p className="text-foreground/70 font-minecraft">Our dedicated staff team is always ready to help with any issues</p>
+          </div>
+          <div className="bg-earth-brown/30 backdrop-blur-md p-6 pixelated-border hover:translate-y-[-5px] transition-all duration-300">
+            <Gift className="text-primary mb-4" size={40} />
+            <h3 className="text-xl font-minecraft font-semibold mb-2">Custom Features</h3>
+            <p className="text-foreground/70 font-minecraft">Enjoy unique gameplay elements and quality-of-life improvements</p>
+          </div>
+          <div className="bg-earth-brown/30 backdrop-blur-md p-6 pixelated-border hover:translate-y-[-5px] transition-all duration-300">
+            <TreeDeciduous className="text-primary mb-4" size={40} />
+            <h3 className="text-xl font-minecraft font-semibold mb-2">Earth Map</h3>
+            <p className="text-foreground/70 font-minecraft">Build your own nation on our 1:1000 scale realistic Earth map</p>
+          </div>
+        </motion.div>
+      </section>
+
       {/* Server Information Section */}
       <section className="py-16 px-4 bg-gradient-to-b from-earth-blue/30 to-transparent backdrop-blur-sm">
         <motion.div
@@ -122,11 +158,19 @@ const Index = () => {
               </div>
               <div className="flex items-center gap-3">
                 <MapPin className="text-primary" size={24} />
-                <p>Server Location: North America (East Coast)</p>
+                <p>Server Location: Mumbai, India</p>
               </div>
               <div className="flex items-center gap-3">
                 <Pickaxe className="text-primary" size={24} />
                 <p>Version: Minecraft Java 1.20+</p>
+              </div>
+              <div className="flex items-center gap-3">
+                <Users className="text-primary" size={24} />
+                <p>Player Slots: 100+ players</p>
+              </div>
+              <div className="flex items-center gap-3">
+                <Server className="text-primary" size={24} />
+                <p>Uptime: 99.9% (24/7 online)</p>
               </div>
             </div>
           </Card>
