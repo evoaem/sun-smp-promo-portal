@@ -1,14 +1,13 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Sun, Users, Star, ArrowDown, Mail, MapPin, Server } from "lucide-react";
+import { Sun, Users, Star, ArrowDown, MapPin, Server } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
 
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
 
   useEffect(() => {
     setIsLoaded(true);
@@ -19,10 +18,10 @@ const Index = () => {
     visible: { opacity: 1, y: 0 },
   };
 
-  const handleContactSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // This would normally send data to a server
-    alert("Thank you for your message! We'll get back to you soon.");
+  const copyServerIP = () => {
+    navigator.clipboard.writeText("play.sunsmp.fun");
+    setIsCopied(true);
+    setTimeout(() => setIsCopied(false), 2000);
   };
 
   return (
@@ -45,6 +44,30 @@ const Index = () => {
           <p className="text-lg md:text-xl text-foreground/80 mb-8 max-w-2xl mx-auto">
             Join our Earth SMP Minecraft server and become part of an amazing community!
           </p>
+          
+          {/* Server IP Box */}
+          <motion.div 
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+            className="bg-primary/30 backdrop-blur-md border-2 border-primary p-4 rounded-lg mb-8 max-w-md mx-auto animate-pulse"
+          >
+            <h2 className="text-xl font-bold mb-2">Server IP Address</h2>
+            <div className="flex items-center justify-center gap-2 bg-primary/40 p-3 rounded-md cursor-pointer hover:bg-primary/50 transition-colors" onClick={copyServerIP}>
+              <Server className="text-foreground" size={20} />
+              <span className="font-mono text-lg font-semibold">play.sunsmp.fun</span>
+            </div>
+            {isCopied && (
+              <motion.p 
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-sm mt-2 font-medium"
+              >
+                IP copied to clipboard!
+              </motion.p>
+            )}
+          </motion.div>
+          
           <div className="space-x-4">
             <Button
               className="bg-primary hover:bg-primary-dark text-white font-semibold px-8 py-6 rounded-lg transition-all duration-300 hover:scale-105"
@@ -144,7 +167,7 @@ const Index = () => {
         </motion.div>
       </section>
 
-      {/* Contact Section */}
+      {/* Server Information Section */}
       <section className="py-20 px-4 bg-gradient-to-b from-transparent to-secondary/80 backdrop-blur-sm">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -152,59 +175,23 @@ const Index = () => {
           transition={{ duration: 0.6 }}
           className="max-w-4xl mx-auto"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">Contact Us</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <Card className="p-6 bg-primary/10 backdrop-blur-md border-primary/20">
-              <h3 className="text-xl font-semibold mb-4">Server Information</h3>
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <Mail className="text-primary" size={24} />
-                  <p>Email: sunsmp@example.com</p>
-                </div>
-                <div className="flex items-center gap-3">
-                  <MapPin className="text-primary" size={24} />
-                  <p>Server Location: North America (East Coast)</p>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Server className="text-primary" size={24} />
-                  <p>Version: Minecraft Java 1.20+</p>
-                </div>
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">Server Information</h2>
+          <Card className="p-6 bg-primary/10 backdrop-blur-md border-primary/20">
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <Server className="text-primary" size={24} />
+                <p>Server IP: play.sunsmp.fun</p>
               </div>
-            </Card>
-            <Card className="p-6 bg-primary/10 backdrop-blur-md border-primary/20">
-              <h3 className="text-xl font-semibold mb-4">Send Us a Message</h3>
-              <form onSubmit={handleContactSubmit} className="space-y-4">
-                <div>
-                  <Input 
-                    placeholder="Your Name" 
-                    className="bg-white/20 border-primary/30 focus-visible:ring-primary"
-                    required
-                  />
-                </div>
-                <div>
-                  <Input 
-                    type="email" 
-                    placeholder="Your Email" 
-                    className="bg-white/20 border-primary/30 focus-visible:ring-primary"
-                    required
-                  />
-                </div>
-                <div>
-                  <Textarea 
-                    placeholder="Your Message" 
-                    className="bg-white/20 border-primary/30 focus-visible:ring-primary min-h-[120px]"
-                    required
-                  />
-                </div>
-                <Button 
-                  type="submit"
-                  className="w-full bg-primary hover:bg-primary-dark text-white"
-                >
-                  Send Message
-                </Button>
-              </form>
-            </Card>
-          </div>
+              <div className="flex items-center gap-3">
+                <MapPin className="text-primary" size={24} />
+                <p>Server Location: North America (East Coast)</p>
+              </div>
+              <div className="flex items-center gap-3">
+                <Server className="text-primary" size={24} />
+                <p>Version: Minecraft Java 1.20+</p>
+              </div>
+            </div>
+          </Card>
         </motion.div>
       </section>
 
